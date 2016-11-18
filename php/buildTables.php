@@ -19,7 +19,7 @@ if (!$conn) {
 }
 // sql to create table
 $sql = "CREATE TABLE Movies (
-MovieID PRIMARY KEY, 
+MovieID int PRIMARY KEY, 
 Name VARCHAR(30),
 Description VARCHAR(500),
 PosterURL VARCHAR(100)
@@ -34,7 +34,7 @@ if (mysqli_query($conn, $sql)) {
 $sql = "CREATE TABLE Ratings (
 UserID int PRIMARY KEY,
 MovieID int,
-Rating int,
+Rating int
 )";
 if (mysqli_query($conn, $sql)) {
     echo "Table Ratings created successfully<br>";
@@ -46,7 +46,7 @@ if (mysqli_query($conn, $sql)) {
 $sql = "CREATE TABLE Users (
 UserID int PRIMARY KEY,
 Username VARCHAR(30),
-Password VARCHAR(30),
+Password VARCHAR(30)
 )";
 if (mysqli_query($conn, $sql)) {
     echo "Table Users created successfully<br>";
