@@ -1,28 +1,12 @@
-<DOCTYPE! html>
-    <head>
-        
-    </head>
+<?php
+$key = 'fb8c9a3a6abeffc783e765d89f824ab9';
+$api = file_get_contents('http://api.themoviedb.org/3/movie/now_playing?api_key='.$key.'');
+$get = json_decode($api,true);
 
-<body>
-    
-
-    include(tmdb.php);
-
-    $tmdb_xml = new TMDb('fb8c9a3a6abeffc783e765d89f824ab9', TMDb::XML);
-    $title = $_POST['Frozen'];
-
-    $xml_movies_result = $tmdb_xml->searMovie($title);
-    $xml = simplexml_load_string($sml_movies_result);
-
-    echo '<table>';
-    echo '<tr>';
-    echo '<th>Cover</th>';
-    echo '<th>Info</th>';
-    
-    foreach ($xml->movies->movie as $move)
-    {
-        $moviename = $movie->name;
-        $imdbid = $movie->name;
-    }
-</body>
-</DOCTYPE>
+foreach ($get['results'] as $a)
+{
+    echo var_dump($a);
+    echo '<br>';
+    echo '<li><a href="/'.$a['original_title'].'" title="'.$a['original_title'].'"><small>'.$a['original_title'].'</small></a></li>';
+}
+?>
