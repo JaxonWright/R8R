@@ -30,7 +30,9 @@ $retVal=array();
 while ($row = mysqli_fetch_assoc($resultSet)){
 	$retVal[]=$row;
 }
-
+$json = json_encode($retVal);
 //encode the array as JSON
-echo json_encode($retVal);
+//echo $json;
+
+return $json;
 ?>

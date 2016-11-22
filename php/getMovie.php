@@ -19,9 +19,7 @@ if (!$conn){
 	die('Could not connect: '. mysql_error());
 }
 
-$MovieID =  $_GET['MovieID'];
-
-$sql="SELECT * FROM Movies WHERE MovieID = $MovieID";
+$sql="SELECT * FROM Movies WHERE MovieID = $id";
 
 $resultSet = mysqli_query($conn, $sql);
 if (!$resultSet) { // add this check.
@@ -32,5 +30,5 @@ $retVal=array();
 $retVal[]=mysqli_fetch_assoc($resultSet);
 
 //encode the array as JSON
-echo json_encode($retVal);
+return json_encode($retVal);
 ?>
