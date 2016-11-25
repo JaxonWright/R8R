@@ -44,9 +44,10 @@ if (mysqli_query($conn, $sql)) {
 
 // sql to create table
 $sql = "CREATE TABLE Users (
-UserID int PRIMARY KEY,
+UserID int NOT NULL AUTO_INCREMENT,
 Username VARCHAR(30),
-Password VARCHAR(30)
+Password VARCHAR(30),
+PRIMARY KEY (UserID)
 )";
 if (mysqli_query($conn, $sql)) {
     echo "Table Users created successfully<br>";

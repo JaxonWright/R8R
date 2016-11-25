@@ -31,14 +31,6 @@
                             }
         	echo		  "</div>
         			   </div>
-        			   <div class='panel panel-default'>
-        			      <div class='panel-heading'>
-        					<h3 class='panel-title'>Rotton Tomatos</h3>
-        			      </div>
-        			      <div class='panel-body' id='rtRating'>";
-        		            
-        	echo         "</div>
-        			   </div>
         			   <div class='panel panel-primary'>
         			      <div class='panel-heading'>
         					<h3 class='panel-title'>Your Rating</h3>
