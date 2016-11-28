@@ -36,7 +36,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand float-lg-left" href="/" style="margin: 8px 8px -8px 0px; padding: 0px 0px 0px 0px;"><img src="/img/r8rlogoW.png" height="45px"/></a>
+                    <a class="navbar-brand float-lg-left" href="" style="margin: 8px 8px -8px 0px; padding: 0px 0px 0px 0px;"><img src="/img/r8rlogoW.png" height="45px"/></a>
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav col-md-10">
@@ -47,18 +47,16 @@
                                 </div>
                             </form>
                         </div>
-                        <li class="dropdown float-lg-right">
-                          <a href="" data-target="#" class="dropdown-toggle" data-toggle="user">Log In</a>
-                          <ul class="dropdown-menu">
-                            <li><a href="javascript:void(0)">Action</a></li>
-                            <li><a href="javascript:void(0)">Another action</a></li>
-                            <li><a href="javascript:void(0)">Something else here</a></li>
-                            <li class="divider"></li>
-                            <li class="dropdown-header">Dropdown header</li>
-                            <li><a href="javascript:void(0)">Separated link</a></li>
-                            <li><a href="javascript:void(0)">One more separated link</a></li>
-                          </ul>
+                        <li class="float-lg-right">
+                            <a id="usernameNav"></a>
                         </li>
+                        <li class="float-lg-right">
+                            <a id="loginNav" href="#login" data-target="#" class="dropdown-toggle" data-toggle="user">Log In</a>
+                        </li>
+                        <li class="float-lg-right">
+                            <a id="logoutNav" href="#logout" data-target="#" class="dropdown-toggle hidden" data-toggle="user">Log Out</a>
+                        </li>
+                          
                     </ul>
                 </div>
             </div>
@@ -78,14 +76,34 @@
         
         <script>
             window.page = window.location.hash || "#front"; 
-           $(document).ready(loadPage(window.page));
+           $(document).ready(function(){
+               
+               if (localStorage["uid"] && localStorage["username"]) {
+                    $("#usernameNav").html(localStorage.getItem("username"));
+                    $("#loginNav").addClass("hidden"); 
+                    $("#logoutNav").removeClass("hidden"); 
+               }
+
+               loadPage(window.page);
+           });
         
            function loadPage(p) {
-              if (p == "#front")
+              if (p == "#front" || p == "")
                 $(".container#body").load("front.php");
               else if (p.substr(0,6) == "#movie")
                 $(".container#body").load("movie.php?id=" + p.substr(10));
-           } 
+              else if (p == "#login")
+                $(".container#body").load("login.html");
+              else if(p == "#logout"){
+                //handle logout
+                localStorage.clear();
+                $("#usernameNav").html("");
+                $("#loginNav").removeClass("hidden"); 
+                $("#logoutNav").addClass("hidden");
+                history.pushState("", document.title, window.location.pathname);
+                loadPage("");
+              }
+           }
         </script>
 
         <!-- Dropdown.js -->

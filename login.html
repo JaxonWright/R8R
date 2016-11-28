@@ -1,0 +1,80 @@
+<html>
+    <h2>Login</h2>
+    
+    <div class="well col-md-6">
+        <div id="usernameInput" class="form-group label-floating">
+            <label class="control-label" for="username">Username</label>
+            <input class="form-control form-control-danger" id="username" type="text">
+            <span id="help" class="help-block hidden">Sorry, that username's taken. Try another?</span>
+        </div>
+    
+        <div id="passwordInput" class="form-group label-floating">
+            <label class="control-label" for="password">Password</label>
+            <input class="form-control" id="password" type="password"/>
+            <span id="helpPass" class="help-block hidden">Incorrect username and/or password</span>
+        </div>
+    
+        <button id="createUser" class="btn btn-primary">Create User</button>
+        <button id="login" class="btn btn-primary btn-raised">Login</button>
+    </div>
+        
+    <script>
+        $("#createUser").click(function() {
+			$.ajax({
+				type: "POST",
+                url: "php/createUser.php",
+                data: {
+                    userName: $("#username").val(),
+                    password: $("#password").val()
+                },
+                dataType: "text"
+            }).done(function (data){
+                if(data === "Success"){
+                    alert("User created");
+                    $("#help").addClass("hidden");
+                } else if(data.startsWith("Duplicate")){
+                    $("#usernameInput").addClass("has-error");
+                    $("#username").focus();
+                    $("#help").removeClass("hidden");
+                }
+            }).fail(function (xhr, status, error){
+                console.log("Error creating user");
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+            });	
+        });
+        
+        $("#login").click(function() {
+            $.ajax({
+				type: "POST",
+                url: "php/login.php",
+                data: {
+                    userName: $("#username").val(),
+                    password: $("#password").val()
+                },
+                dataType: "text"
+            }).done(function (data){
+                if (data == -1){ //login unsuccessful
+                    $("#passwordInput").addClass("has-error");
+                    $("#password").focus();
+                    $("#helpPass").removeClass("hidden");
+                } else { //login success
+                    console.log("Login success");
+                    $("#usernameNav").html($("#username").val());
+                    $("#loginNav").addClass("hidden"); 
+                    $("#logoutNav").removeClass("hidden"); 
+                    localStorage.setItem("uid", data);
+                    localStorage.setItem("username", $("#username").val());
+                    history.pushState("", document.title, window.location.pathname);
+                    loadPage("");
+                }
+            }).fail(function (xhr, status, error){
+                console.log("Error during login");
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+            });
+        });
+    </script>
+</html>

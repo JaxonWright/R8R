@@ -14,13 +14,14 @@
     $userName = $_POST['userName'];
     $password = $_POST['password'];
     
+    
     $sql = "INSERT INTO Users(Username, Password)
         VALUES('$userName', '$password')";
     
-    echo $sql.'<br/>';
+    #echo $sql.'<br>';
     if (mysqli_query($conn, $sql)) {
-        echo "Inserted row to table<br>";
+        echo "Success";
     } else {
-        echo "Error inserting row to table: " . mysqli_error($conn). "<br>";
+        echo mysqli_error($conn);
     }
 ?>

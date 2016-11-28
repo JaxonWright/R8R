@@ -18,7 +18,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 if (!$conn){
 	die('Could not connect: '. mysql_error());
 }
-
+//$id is passed from movie.php
 $sql="SELECT * FROM Movies WHERE MovieID = $id";
 
 $resultSet = mysqli_query($conn, $sql);
