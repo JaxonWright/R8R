@@ -45,10 +45,15 @@
      ?>
      <script>
         $(document).ready(function(){
+            var url = window.location.href;
+            var id = url.substring(url.lastIndexOf('='));
             if (localStorage["uid"] && localStorage["username"]) {
-                $("#userRating").removeClass("hidden"); 
+                $("#userRating").removeClass("hidden");
+                getRating(localStorage["uid"], id);
             }
         });
+        
+        //User Rating Stars
         $(function () {
           $("#rateYo").rateYo({
             starWidth: "25px",
@@ -56,5 +61,25 @@
             halfStar: true
           });
         });
+        
+        function getRating(user, movie) {
+            $.ajax({
+				type: "POST",
+                url: "php/getRating.php",
+                data: {
+                    userID: user,
+                    movieID: movie
+                },
+                dataType: "text"
+            }).done(function (data){
+                //console.log("This movie was rated "+data);
+                $("#rateYo").rateYo("option", "rating", data);
+            }).fail(function (xhr, status, error){
+                console.log("Error getting rating");
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+            });	
+        }
      </script>
 </html>
