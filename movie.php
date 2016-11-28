@@ -31,14 +31,30 @@
                             }
         	echo		  "</div>
         			   </div>
-        			   <div class='panel panel-primary'>
+        			   <div id='userRating' class='panel panel-primary hidden'>
         			      <div class='panel-heading'>
         					<h3 class='panel-title'>Your Rating</h3>
         				  </div>
-        			      <div class='panel-body' id='imdbRating'></div>
+        			      <div class='panel-body' id='userRating'>
+        			        <div id='rateYo'></div>
+        			      </div>
         			   </div>
         		    </div>
         		 </div>";
         }
      ?>
+     <script>
+        $(document).ready(function(){
+            if (localStorage["uid"] && localStorage["username"]) {
+                $("#userRating").removeClass("hidden"); 
+            }
+        });
+        $(function () {
+          $("#rateYo").rateYo({
+            starWidth: "25px",
+            normalFill: "#A0A0A0",
+            halfStar: true
+          });
+        });
+     </script>
 </html>
