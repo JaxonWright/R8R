@@ -44,12 +44,16 @@
         }
      ?>
      <script>
+        var firstLoad = true;
+        var url = window.location.href;
+        var movieID = url.substring(url.lastIndexOf('=')+1);
+        console.log("MovieID= " +movieID);
+        var uid;
         $(document).ready(function(){
-            var url = window.location.href;
-            var id = url.substring(url.lastIndexOf('='));
             if (localStorage["uid"] && localStorage["username"]) {
+                uid = localStorage["uid"];
                 $("#userRating").removeClass("hidden");
-                getRating(localStorage["uid"], id);
+                getRating(uid, movieID);
             }
         });
         
@@ -62,6 +66,17 @@
           });
         });
         
+        // Setter
+        $("#rateYo").rateYo("option", "onSet", function () {
+            if (firstLoad) {
+                firstLoad = false;
+            } else {
+                var rating = $("#rateYo").rateYo("option", "rating");
+                console.log("rating changed");  
+                setRating(uid, movieID, rating);
+            }
+        });
+        
         function getRating(user, movie) {
             $.ajax({
 				type: "POST",
@@ -72,10 +87,35 @@
                 },
                 dataType: "text"
             }).done(function (data){
-                //console.log("This movie was rated "+data);
-                $("#rateYo").rateYo("option", "rating", data);
+                if (data != 0) {
+                    console.log("This movie was previously rated "+data);
+                    $("#rateYo").rateYo("option", "rating", data);
+                } else {
+                    console.log("This movie has not been rated");
+                    firstLoad = false;
+                }
             }).fail(function (xhr, status, error){
                 console.log("Error getting rating");
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+            });	
+        }
+        
+        function setRating(user, movie, rating) {
+            $.ajax({
+				type: "POST",
+                url: "php/rateMovie.php",
+                data: {
+                    userID: user,
+                    movieID: movie,
+                    rating: rating
+                },
+                dataType: "text"
+            }).done(function (data){
+                console.log("movie rated "+data);
+            }).fail(function (xhr, status, error){
+                console.log("Error setting rating");
                 console.log(xhr);
                 console.log(status);
                 console.log(error);

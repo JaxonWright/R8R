@@ -32,9 +32,10 @@ if (mysqli_query($conn, $sql)) {
 
 // sql to create table
 $sql = "CREATE TABLE Ratings (
-UserID int PRIMARY KEY,
+UserID int,
 MovieID int,
-Rating int
+Rating double,
+PRIMARY KEY (UserID, MovieID)
 )";
 if (mysqli_query($conn, $sql)) {
     echo "Table Ratings created successfully<br>";
