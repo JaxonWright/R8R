@@ -30,7 +30,6 @@
 
         <!--custom CSS styling-->
         <link rel="stylesheet" type="text/css" href="css/style.css" />
-        <link  rel="stylesheet/less" type="text/css"  href="css/colors.less"/>
     </head>
     <body onhashchange="loadPage(window.location.hash)">
         <!--NAV BAR-->
@@ -45,14 +44,14 @@
                     <a class="navbar-brand float-lg-left" href="" style="margin: 8px 8px -8px 0px; padding: 0px 0px 0px 0px;"><img src="/img/r8rlogoW.png" height="45px"/></a>
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav col-md-10">
-                        <div class="well well-sm col-md-8" style="margin: 8px 0px 8px 0px; padding: 0px 8px 0px 8px;">
-                            <form role="search">
-                                <div class="form-group form-group-lg float-lg-middle" style="margin: 0px 0px -9px 0px; padding: 0px 0px 0px 0px;">
-                                    <input type="text" class="form-control col-md-12" placeholder="Search" name="search" id="search">
-                                </div>
-                            </form>
-                        </div>
+                    <div class="well well-sm col-md-6" style="margin: 7px 0px 0px 110px; padding: 0px 8px 0px 8px;">
+                        <form role="search">
+                            <div class="form-group form-group-lg float-lg-middle" style="margin: 0px 0px -10px 0px; padding: 0px 0px 0px 0px;">
+                                <input type="text" class="form-control col-md-12" placeholder="Search" name="search" id="search">
+                            </div>
+                        </form>
+                    </div>
+                    <ul class="nav navbar-nav navbar-right" style="margin-right: 80px;">
                         <li class="float-lg-right">
                             <a id="usernameNav"></a>
                         </li>
