@@ -7,3 +7,23 @@ body {
     -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
           box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
+.navbar-default {
+    background-color: #607D8B !important;
+}
+
+.panel-primary>.panel-heading {
+    background-color: #455A64 !important;
+}
+
+.panel-body#imdbRating, .panel-body#avgUserRating  {
+    padding: 0px;
+}
+
+.btn-primary.btn-raised {
+    background-color: #455A64 !important;
+}
+
+.btn-primary#createUser {
+    color: #455A64 !important;
+}

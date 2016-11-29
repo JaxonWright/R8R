@@ -23,11 +23,19 @@
         				    include_once('./php/imdb.class.php');
         		            $oIMDB = new IMDB($item['Name']);
                             if ($oIMDB->isReady) {
-                                echo "<center><p class='lead'><strong>".$oIMDB->getRating()."</strong>/10</p></center>";
+                                echo "<center><h2><strong>".$oIMDB->getRating()."</strong>/10</h2></center>";
                             } else {
                                 echo "<h1><strong>N/A</strong></h1>";
                             }
         	echo		  "</div>
+        			   </div>
+        			   <div id='avgUserRating' class='panel panel-primary'>
+        			      <div class='panel-heading'>
+        					<h3 class='panel-title'>Avg User Rating</h3>
+        				  </div>
+        			      <div class='panel-body' id='avgUserRating'>
+        			        <center><h2 id='avg'></h2></center>
+        			      </div>
         			   </div>
         			   <div id='userRating' class='panel panel-primary hidden'>
         			      <div class='panel-heading'>
@@ -53,6 +61,7 @@
                 $("#userRating").removeClass("hidden");
                 getRating(uid, movieID);
             }
+            getAvgRating(movieID);
         });
         
         //User Rating Stars
@@ -114,6 +123,29 @@
                 console.log("movie rated "+data);
             }).fail(function (xhr, status, error){
                 console.log("Error setting rating");
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+            });	
+        }
+        
+        function getAvgRating(movie) {
+            $.ajax({
+				type: "POST",
+                url: "php/getAvgRating.php",
+                data: {
+                    movieID: movie
+                },
+                dataType: "text"
+            }).done(function (data){
+                console.log("average rating is "+data);
+                if (data == -1) {
+                    $("#avg").html("N/A");
+                } else {
+                    $("#avg").html("<strong>"+data+"</strong>/5");
+                }
+            }).fail(function (xhr, status, error){
+                console.log("Error getting avg rating");
                 console.log(xhr);
                 console.log(status);
                 console.log(error);
