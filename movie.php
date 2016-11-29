@@ -5,10 +5,8 @@
         $array = json_decode($resultjson, true);
         foreach($array as $item) {
             echo "<div class='row'>
-        			<div class='col-md-3'>
-        		        <div class='well well-sm' style='margin: 8px 65px 8px 8px; padding: 0px 0px 0px 0px'>";
-        	echo           "<img id='poster' alt='poster' src='".$item['PosterURL']."' width='190px' height='274px'/>
-        	            </div>
+        			<div class='col-md-3'>";
+        	echo       "<img id='poster' class='poster' alt='poster' src='".$item['PosterURL']."' width='190px' height='274px'/>
         			</div>
         			<div class='col-md-7'>";
         	echo       "<h3 id='title'>".$item['Name']."</h3>
