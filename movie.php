@@ -5,16 +5,16 @@
         $array = json_decode($resultjson, true);
         foreach($array as $item) {
             echo "<div class='row'>
-        			<div class='col-md-3'>";
+        			<div class='col-md-3 col-sm-4'>";
         	echo       "<img id='poster' class='poster' alt='poster' src='".$item['PosterURL']."' width='190px' height='274px'/>
         			</div>
-        			<div class='col-md-7'>";
+        			<div class='col-lg-7 col-md-6 col-sm-5'>";
         	echo       "<h3 id='title'>".$item['Name']."</h3>
         				<p id='description'>";
         	echo           $item['Description'];				
         	echo	    "</p>
         			</div>
-        			<div class='col-md-2'>
+        			<div class='col-lg-2 col-md-3 col-sm-3'>
         			   <div class='panel panel-default'>
         			      <div class='panel-heading'>
         					 <h3 class='panel-title'>IMDb Rating</h3>
