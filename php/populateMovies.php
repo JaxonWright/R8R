@@ -4,6 +4,8 @@ $username = getenv('C9_USER');
 $password = "";
 $dbname = "c9";
 
+$category = $_GET["category"];
+
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 // Check connection
 if (!$conn) {
@@ -11,7 +13,7 @@ if (!$conn) {
 }
 
 $key = 'fb8c9a3a6abeffc783e765d89f824ab9';
-$api = file_get_contents('http://api.themoviedb.org/3/movie/now_playing?api_key='.$key.'');
+$api = file_get_contents('http://api.themoviedb.org/3/movie/'.$category.'?api_key='.$key.'');
 $get = json_decode($api,true);
 
 foreach ($get['results'] as $a) {
