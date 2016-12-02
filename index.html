@@ -55,7 +55,7 @@
                     </div>
                     <ul class="nav navbar-nav navbar-right" style="margin-right: 80px;">
                         <li class="float-lg-right">
-                            <a id="usernameNav"></a>
+                            <a id="usernameNav" href="#userRating"></a>
                         </li>
                         <li class="float-lg-right">
                             <a id="loginNav" href="#login" data-target="#" class="dropdown-toggle" data-toggle="user">Log In</a>
@@ -106,6 +106,9 @@
                 $("#logoutNav").addClass("hidden");
                 history.pushState("", document.title, window.location.pathname);
                 loadPage("");
+              } else if(p == "#userRating"){
+                //handle logout
+                $(".container#body").load("userRated.php?userid=" + localStorage.getItem("uid"));
               }
            }
         </script>

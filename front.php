@@ -1,5 +1,5 @@
 <html>
-    <h2>Now Showing</h2>
+    <h2>All Movies</h2>
     <!--<a href="/#movie" class="btn btn-raised primary" >LOAD MOVIE</a>-->
     <?php
         $json = include('./php/getMovies.php');
