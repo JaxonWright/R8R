@@ -1,4 +1,9 @@
 <?php
+    // $servername = "cis.gvsu.edu";
+    // $username = "teitsmch";
+    // $password = "teitsmch0925";
+    // $dbname = "teitsmch";
+
     $servername = getenv('IP');
     $username = getenv('C9_USER');
     $password = "";
